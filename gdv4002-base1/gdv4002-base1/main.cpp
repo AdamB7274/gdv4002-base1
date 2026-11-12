@@ -3,6 +3,7 @@
 
 // Function prototypes
 
+void myUpdate(GLFWwindow* window, double tDelta);
 
 // Global Variables
 
@@ -30,11 +31,14 @@ int main(void) {
 
 	GameObject2D* player1Object = getObject("player1");
 
+
 	if (player1Object != nullptr) {
 
 		// update player1 here
 		player1Object->position = glm::vec2(-1.0f, 1.0f);
 		player1Object->orientation = glm::radians(-30.0f);
+		player1Object->textureID = loadTexture("Resources\\Textures\\bumblebee.png");
+
 	}
 
 	GameObject2D* player2Object = getObject("player2");
@@ -43,6 +47,7 @@ int main(void) {
 	{
 		player2Object->position = glm::vec2(1.0f, 1.0f);
 		player2Object->orientation = glm::radians(45.0f);
+		player2Object->textureID = loadTexture("Resources\\Textures\\alien01.png");
 	}
 
 
@@ -60,4 +65,11 @@ int main(void) {
 
 	// return success :)
 	return 0;
+}
+
+void myUpdate(GLFWwindow* window, double tDelta) 
+{
+	GameObject2D* player1 = getObject("player1");
+	float player1RotationSpeed = glm::radians(90.0f);
+	player1->orientation += player1RotationSpeed * tDelta;
 }
